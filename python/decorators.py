@@ -31,5 +31,6 @@ def foo():
 def bar():
     print 'bar'
 
+
 foo()
 bar()
