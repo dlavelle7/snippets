@@ -2,6 +2,7 @@
 import time
 import sys
 
+
 def main():
     while True:
         print "Interrupt me!"
