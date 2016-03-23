@@ -1,2 +1,2 @@
 ## Handy Snippets ##
-Useful collection of code snippets
+Useful collection of my code snippets
