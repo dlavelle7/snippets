@@ -1,4 +1,14 @@
 #!/usr/bin/env python
+"""
+Caching decorator for storing fibonacci numbers.
+
+Particularly useful here due to the recursive nature of the fib() function.
+Measure execution time with 'timeit' library. Output compared without use of
+the @cache decorator:
+
+With decorator      : < 1 sec
+Without decorator   : 43 secs
+"""
 import timeit
 
 
@@ -9,7 +19,6 @@ def cache_fibs(callable_func):
         if n not in cache:
             cache[n] = callable_func(n)
         return cache[n]
-
     return wrapper
 
 
@@ -23,6 +32,7 @@ def fib(n):
     return val1 + val2
 
 
+# Test fib() function
 true_fib = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
 assert [fib(n) for n in range(len(true_fib))] == true_fib
 
@@ -35,13 +45,4 @@ def wrapper(func, *args, **kwargs):
 
 wrapped_func = wrapper(fib, 40)
 
-print timeit.timeit(wrapped_func, number=1)
-
-"""
-Compare without @cache decorator
-
-Output:
-
-With cache decorator   : instantaneous
-Without cach decorator : 43 secs
-"""
+print "Execution time: %s" % timeit.timeit(wrapped_func, number=1)
