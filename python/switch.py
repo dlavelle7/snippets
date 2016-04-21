@@ -21,11 +21,14 @@ def do_c(data):
 def do_default(data):
     print "do_default() with '{0}'".format(data)
 
-switches = {
-    'A': do_a,
-    'B': do_b,
-    'C': do_c
-}
+
+def switch(caseStatement):
+    switches = {
+        'A': do_a,
+        'B': do_b,
+        'C': do_c
+    }
+    return switches.get(caseStatement, do_default)
 
 
 class A(object):
@@ -50,7 +53,7 @@ b = B()
 c = C()
 d = D()
 
-switches.get(a.__class__.__name__, do_default)('data')
-switches.get(b.__class__.__name__, do_default)('data')
-switches.get(c.__class__.__name__, do_default)('data')
-switches.get(d.__class__.__name__, do_default)('data')
+switch(a.__class__.__name__)('data')
+switch(b.__class__.__name__)('data')
+switch(c.__class__.__name__)('data')
+switch(d.__class__.__name__)('data')
