@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """Switch/case control statement in Python
 
-Also a handy pattern for delegating work based on Class,
-where polymorphism may not be practical.
+Also included is a handy pattern for delegating work based on Class,
+where inheritance for example may not be practical.
 """
 
 
