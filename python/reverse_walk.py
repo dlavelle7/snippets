@@ -20,7 +20,6 @@ def get_repo_root_dir():
         else:
             current = os.path.abspath(os.path.join(current, os.pardir))
     print "The current working directory is not a git repository."
-    sys.exit(1)
 
 
 def reverse_walk(bottom):
