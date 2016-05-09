@@ -1,7 +1,6 @@
 """Some examples of how to use threading in Python"""
 import threading
 
-# TODO: notify()
 
 lock = threading.RLock()  # shared lock
 
