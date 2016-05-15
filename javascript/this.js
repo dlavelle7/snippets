@@ -2,8 +2,6 @@
    Examples of using 'this'
 */
 
-// TODO: Finish and tidy (JSLint?)
-// TODO: JavaScript assert?
 
 // 1. Global context
 this.spam = "eggs";
@@ -17,7 +15,7 @@ function getThis(){
     return this;
 }
 
-// When used from browser (diff for nodejs)
+// Nodejs doesn't have a window object
 if (!(typeof(window) === 'undefined')){
     console.log("Example #2.1:", this === getThis())
     console.log("Example #2.1:", window === getThis())
