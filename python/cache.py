@@ -12,6 +12,7 @@ import timeit
 
 
 def cache_fibs(callable_func):
+    """Decorator to cache known fibonacci numbers"""
     cache = dict()
 
     def wrapper(n):
@@ -21,6 +22,7 @@ def cache_fibs(callable_func):
     return wrapper
 
 
+@cache_fibs
 def fib(n):
     """Return nth fibonacci number"""
     sequence = [0, 1]
@@ -31,7 +33,7 @@ def fib(n):
     return sequence.pop()
 
 
-# Measure execution time
+# Measure execution time with the timeit library
 def wrapper(func, *args, **kwargs):
     def wrapped():
         return func(*args, **kwargs)
