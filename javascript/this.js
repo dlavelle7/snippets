@@ -6,7 +6,7 @@
 // 1. Global context
 this.spam = 'eggs';
 
-console.log('Example #1:', this['spam'] === 'eggs');
+console.log('Example #1.0:', this['spam'] === 'eggs');
 
 // 2 Function context
 // 2.1 Simple call
@@ -62,8 +62,8 @@ var that = {foo: 'foo'};
 // The first argument will be the functions 'this' object,
 // the subsequent args will be passed to the function
 var res = multiply.call(that, 'bar', 'baz');
-console.log('Example#2.5:', res === 'foobarbaz');
+console.log('Example #2.5:', res === 'foobarbaz');
 
 // apply() works the same, but function arguments are passed as array
 var res = multiply.apply(that, ['bar', 'baz']);
-console.log('Example#2.5:', res === 'foobarbaz');
+console.log('Example #2.5:', res === 'foobarbaz');
