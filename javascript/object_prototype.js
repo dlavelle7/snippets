@@ -19,32 +19,32 @@ function Employee(first, last, age) {
 
 // use 'new' keyword to create new objects from the prototype
 var joe = new Employee('joe', 'bloggs', 30);
-console.log('Example #1.1:', joe.first === 'joe');
-console.log('Example #1.2:', typeof(joe.getYearBorn()) === 'number');
+console.assert(joe.first === 'joe');
+console.assert(typeof(joe.getYearBorn()) === 'number');
 
 
 // 2. Add a property and function to an object
 var bob = new Employee('bob', 'black', 40);
 bob.nickname = 'bobby';
-console.log('Example #2.1:', bob.nickname === 'bobby');
+console.assert(bob.nickname === 'bobby');
 
 bob.formatAge = function() {
     return bob.age + 'yrs';
 };
 
-console.log('Example #2.2:', bob.formatAge() === '40yrs');
+console.assert(bob.formatAge() === '40yrs');
 
 
 // 3. Use the 'prototype' property to add properties and functions to
 // existing Prototypes
 // Note: Can't do it without 'prototype' property as Prototype is not an object
 Employee.prototype.basedIn = 'Ireland';
-console.log('Example #3.1:', joe.basedIn === 'Ireland');
+console.assert(joe.basedIn === 'Ireland');
 
 Employee.prototype.fullName = function() {
     return this.first + ' ' + this.last;
 };
-console.log('Example #3.2:', joe.fullName() === 'joe bloggs');
+console.assert(joe.fullName() === 'joe bloggs');
 
 
 // 4. 'Base' and 'sub classes' in javascript
@@ -60,6 +60,6 @@ Developer.prototype = Object.create(Employee.prototype);
 Developer.prototype.constructor = Developer;
 
 mary = new Developer('mary', 'murphy', 50);
-console.log('Example #4.1:', mary.first === 'mary');
-console.log('Example #4.2:', mary.fullName() === 'mary murphy');
-console.log('Example #4.3:', mary.role === 'development');
+console.assert(mary.first === 'mary');
+console.assert(mary.fullName() === 'mary murphy');
+console.assert(mary.role === 'development');
