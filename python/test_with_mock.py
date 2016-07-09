@@ -2,6 +2,7 @@ import unittest
 import reverse_walk
 from mock import Mock, patch, call
 from inheritance import Super
+from create_subprocess import create_process
 
 
 class TestWithMock(unittest.TestCase):
@@ -28,9 +29,19 @@ class TestWithMock(unittest.TestCase):
         reverse_walk.os.listdir.side_effect = find_at_b  # finds root at /a/b
         self.assertEqual('/a/b', reverse_walk.get_repo_root_dir())
 
+    def test_create_subprocess(self):
+        # Mocking Classes - mock Popen to prevent UT from spawning a process
+        with patch('create_subprocess.Popen') as MockPopen:
+            # Mock the object created by Popen()
+            instance = MockPopen.return_value
+            # Mock the communicate() function and returncode attribute
+            instance.communicate.return_value = ('foo.py', '')
+            instance.returncode = 0
+            create_process('ls')
+
     @patch.object(Super, 'do')
-    def test_mock_a_class_function(self, mock_do):
-        # Using mock.patch.object() and reset_mock()
+    def test_mock_an_object(self, mock_do):
+        # Using mock.patch.object() to mock local object and reset_mock()
         mock_do.return_value = 'bar'
         instance = Super('foo')
         self.assertEqual('bar', instance.do())
