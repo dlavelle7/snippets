@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+
+# Import module installed by setup.py and call
+import mycmd
+mycmd.do()
