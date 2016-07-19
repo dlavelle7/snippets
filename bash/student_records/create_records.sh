@@ -4,7 +4,7 @@
 SCRIPT_DIR=$(dirname $(realpath $0))
 
 # Cleanup old output first
-rm -r $SCRIPT_DIR/output
+rm -r $SCRIPT_DIR/output > /dev/null 2>&1  # redirect output and error
 mkdir $SCRIPT_DIR/output
 
 
