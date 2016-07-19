@@ -24,7 +24,7 @@ on each line.
 
 You must produce student records for each student. These must be contained in a folder named <StudentID>
 
-There must be 
+There must be:
 
 * a file named Details.txt containing student details
 
@@ -32,11 +32,11 @@ There must be
 
     <ModuleID> <Mark>
 
-* a file named notes.txt, if applicable containing 
+* a file named notes.txt, if applicable containing:
 
     Failed:
 
-    <ModuleID> 
+    <ModuleID>
 
 Testing
 -------
