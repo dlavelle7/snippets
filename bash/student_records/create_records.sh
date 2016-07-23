@@ -1,12 +1,11 @@
 #!/bin/bash
 
-
-SCRIPT_DIR=$(dirname $(realpath $0))
+# Get this scripts dir. Alternately: SCRIPT_DIR=$(dirname $(realpath $0))
+SCRIPT_DIR=${0%/*}  # Note: sh & ./ will give different $0
 
 # Cleanup old output first
 rm -r $SCRIPT_DIR/output > /dev/null 2>&1  # redirect output and error
 mkdir $SCRIPT_DIR/output
-
 
 function write_student_resuts {
     # Get block name, alternative to: block_name=$(basename $1)
@@ -27,14 +26,14 @@ function write_student_resuts {
                 echo $module_name $module_result >> $student_block_path
                 # Check if this student has failed
                 check_for_failures $module_result $2 $module_name
+                break  # Student result found, move on
             fi
         done < $module
     done
 }
 
-
 function check_for_failures {
-
+    # Check if the student failed
     if [ $1 -lt 40 ]
     then
         notes_file_path=${2}/notes.txt
@@ -46,9 +45,7 @@ function check_for_failures {
         # Append the failed module result
         echo $3 >> $notes_file_path
     fi
-
 }
-
 
 # Loop over each student
 while read -r student; do
