@@ -16,7 +16,7 @@ Results take the form:
     <StudentID><Mark>
 ```
 
-and are contained in files named <modulecode>.txt
+and are contained in files named `<modulecode>.txt`
 
 There is also a file named `Students.txt` containing:
 
@@ -26,11 +26,8 @@ There is also a file named `Students.txt` containing:
 
 on each line.
 
-You must produce student records for each student. These must be contained in a folder named:
-
-```
-    <StudentID>
-```
+You must produce student records for each student. These must be contained in
+a folder named `<StudentID>`
 
 There must be:
 
