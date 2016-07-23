@@ -10,13 +10,13 @@ All output files must be stored to a folder named `output`, which will exist.
 
 Results for module marks are contained in folders for each block (1-4).
 
-Results take the form:
+Results are contained in files named `<modulecode>.txt` and take the following
+form:
 
 ```
     <StudentID><Mark>
 ```
 
-and are contained in files named `<modulecode>.txt`.
 
 There is also a file named `Students.txt` containing the following on each line:
 
