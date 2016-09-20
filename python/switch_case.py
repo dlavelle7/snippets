@@ -7,28 +7,23 @@ where inheritance for example may not be practical.
 
 
 def do_a(data):
-    print "do_a() with '{0}'".format(data)
+    print "do_a() with arg '{0}'".format(data)
 
 
 def do_b(data):
-    print "do_b() with '{0}'".format(data)
-
-
-def do_c(data):
-    print "do_c() with '{0}'".format(data)
+    print "do_b() with arg '{0}'".format(data)
 
 
 def do_default(data):
-    print "do_default() with '{0}'".format(data)
+    print "do_default() with arg '{0}'".format(data)
 
 
-def switch(caseStatement):
+def switch(case):
     switches = {
         'A': do_a,
         'B': do_b,
-        'C': do_c
     }
-    return switches.get(caseStatement, do_default)
+    return switches.get(case, do_default)
 
 
 class A(object):
@@ -40,20 +35,30 @@ class B(object):
 
 
 class C(object):
+    """No case for C"""
     pass
 
 
-class D(object):
-    """No switch for D"""
-    pass
+for instance in [A(), B(), C()]:
+    switch(instance.__class__.__name__)('data')
 
 
-a = A()
-b = B()
-c = C()
-d = D()
+# Here is an example where each case function may have different args. Maybe
+# not the most readable, but is an alternative to if/else branches.
+def foo(int1, int2):
+    print "foo() with two int args '{0}' & '{1}'".format(int1, int2)
 
-switch(a.__class__.__name__)('data')
-switch(b.__class__.__name__)('data')
-switch(c.__class__.__name__)('data')
-switch(d.__class__.__name__)('data')
+
+def bar(val):
+    print "bar() with a string arg '{0}'".format(val)
+
+
+alt_switch = {
+    "foo": lambda: foo(1, 2),
+    "bar": lambda: bar('barbar'),
+}
+
+
+for alt_case in ["foo", "bar"]:
+    # Functions can be called without knowning args at this point
+    alt_switch.get(alt_case)()
