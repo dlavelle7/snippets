@@ -9,19 +9,19 @@ mkdir $SCRIPT_DIR/output
 
 function write_student_resuts {
     # Get block name, alternative to: block_name=$(basename $1)
-    strip_slash=${1%/}  # remove trailing slash
-    block_name=${strip_slash##*/}  # remove leading path
-    student_block_path=${2}/${block_name}_results.txt
+    local strip_slash=${1%/}  # remove trailing slash
+    local block_name=${strip_slash##*/}  # remove leading path
+    local student_block_path=${2}/${block_name}_results.txt
     for module in $1*.txt; do
         # Alternatively: module_name=$(basename $module .txt)
-        module_filename=${module##*/}
-        module_name=${module_filename%.txt}
+        local module_filename=${module##*/}
+        local module_name=${module_filename%.txt}
         # Find this students results for each module
         while read -r result_line; do
             IFS=' ' read -a result_array <<< "$result_line"
             if [ "${result_array[0]}" = $student_id ]
             then
-                module_result="${result_array[1]}"
+                local module_result="${result_array[1]}"
                 # Append module result to this block (double >> appends)
                 echo $module_name $module_result >> $student_block_path
                 # Check if this student has failed
@@ -36,7 +36,7 @@ function check_for_failures {
     # Check if the student failed
     if [ $1 -lt 40 ]
     then
-        notes_file_path=${2}/notes.txt
+        local notes_file_path=${2}/notes.txt
         # If this is the first found failure, create notes.txt
         if [ ! -f $notes_file_path ]
         then

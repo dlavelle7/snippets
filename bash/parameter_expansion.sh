@@ -4,7 +4,7 @@
 
 # 1. Get default shell variables ${variable:-default}
 function foo {
-    value=${1:-foobar}  # if argument not passed, set a default
+    local value=${1:-foobar}  # if argument not passed, set a default
     echo $value
 }
 
@@ -43,7 +43,7 @@ echo ${#robin}  # -> echos 7
 
 # 6. Display error message and stop execution ${variable:?Error message}
 function bar {
-    res=${1:?"Error you did not pass an arg to bar()"}
+    local res=${1:?"Error you did not pass an arg to bar()"}
 }
 
 bar "eggs"  # -> No Error

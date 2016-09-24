@@ -3,13 +3,13 @@
 # Useful bash script for doing live demos
 
 function wait_enter {
-    SZ=`stty size | cut -f1 -d' '`
+    local SZ=`stty size | cut -f1 -d' '`
     tput cup ${SZ} 0; read -p 'Press enter to continue . . .'
     clear
 }
 
 function run_and_show_command {
-    CMD=$1
+    local CMD=$1
     echo $CMD
     printf "\n"
     eval $CMD
