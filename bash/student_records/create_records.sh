@@ -18,8 +18,9 @@ function write_student_resuts {
         local module_name=${module_filename%.txt}
         # Find this students results for each module
         while read -r result_line; do
-            IFS=' ' read -a result_array <<< "$result_line"
-            if [ "${result_array[0]}" = $student_id ]
+            # IFS defaults to whitespace which is our delimeter
+            read -a result_array <<< "$result_line"
+            if [[ "${result_array[0]}" = $student_id ]]
             then
                 local module_result="${result_array[1]}"
                 # Append module result to this block (double >> appends)
@@ -34,11 +35,11 @@ function write_student_resuts {
 
 function check_for_failures {
     # Check if the student failed
-    if [ $1 -lt 40 ]
+    if (( $1 < 40 ))
     then
         local notes_file_path=${2}/notes.txt
         # If this is the first found failure, create notes.txt
-        if [ ! -f $notes_file_path ]
+        if [[ ! -f $notes_file_path ]]
         then
             echo 'Failed:' > $notes_file_path
         fi
@@ -50,7 +51,7 @@ function check_for_failures {
 # Loop over each student
 while read -r student; do
     # Get next student details
-    IFS=' ' read -a student_array <<< "$student"  # could do: array=($student)
+    read -a student_array <<< "$student"  # could do: array=($student)
     student_id="${student_array[0]}"
 
     # Create output for that student
