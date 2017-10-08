@@ -11,7 +11,7 @@ class TestWithMock(unittest.TestCase):
     @patch('reverse_walk.os.listdir', Mock(return_value=[]))
     @patch('reverse_walk.os.getcwd', Mock(return_value='/a/b/c/d'))
     def test_get_repo_root_dir(self):
-        # Using mock.patch decorator & context manager
+        """Using mock.patch decorator & context manager."""
         with patch('reverse_walk.sys.stdout.write') as mock_stdout:
             self.assertEqual(None, reverse_walk.get_repo_root_dir())
             self.assertTrue(reverse_walk.os.listdir.called)
@@ -22,15 +22,14 @@ class TestWithMock(unittest.TestCase):
             self.assertEqual(expected, mock_stdout.call_args_list)
 
         # Using a mock objects 'side_effect'
-        nodes_dirs = [['r', 'z'], ['.gitignore', 'README.md', '.git'], ['y'], ['.git']]
-        def find_at_b(current):
-            return nodes_dirs.pop()
+        nodes_dirs = [['.git'], ['y'], ['.gitignore', 'README.md', '.git'],
+                      ['r', 'z']]
 
-        reverse_walk.os.listdir.side_effect = find_at_b  # finds root at /a/b
+        reverse_walk.os.listdir.side_effect = nodes_dirs  # finds root at /a/b
         self.assertEqual('/a/b', reverse_walk.get_repo_root_dir())
 
     def test_create_subprocess(self):
-        # Mocking Classes - mock Popen to prevent UT from spawning a process
+        """Mocking Classes - mock Popen to prevent test spawning a process."""
         with patch('create_subprocess.Popen') as MockPopen:
             # Mock the object created by Popen()
             instance = MockPopen.return_value
@@ -41,7 +40,7 @@ class TestWithMock(unittest.TestCase):
 
     @patch.object(Super, 'do')
     def test_mock_an_object(self, mock_do):
-        # Using mock.patch.object() to mock local object and reset_mock()
+        """Using mock.patch.object() to mock local object and reset_mock()"""
         mock_do.return_value = 'bar'
         instance = Super('foo')
         self.assertEqual('bar', instance.do())
