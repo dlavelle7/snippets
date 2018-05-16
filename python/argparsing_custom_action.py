@@ -1,7 +1,7 @@
-"""Argparsing example using a custom Action (Python 3.6).
+"""Argparsing example using a custom Action and type (Python 3.6).
 
 Accept a list of ip addresses as strings, that needs to be converted to a
-list of sets containing ip_address() objects.
+list of sets containing ip_address() IPv4 objects.
 Encounted using: aiohttp_remotes.XForwardedStrict.
 
 Call script like:
@@ -11,12 +11,12 @@ import argparse
 
 from ipaddress import ip_address
 
-any_ipv4_address = ip_address("0.0.0.0")
+ANY_IPV4_ADDRESS = ip_address("0.0.0.0")
 
 
 class StoreNargsAsListOfSets(argparse.Action):
 
-    def __call__(self, parser, namespace, values, option_string=None):
+    def __call__(self, parser_used, namespace, values, option_string=None):
         """Convert list of strs to list of sets for aiohttp_remotes."""
         new_values = [{ip_address(val)} for val in values]
         setattr(namespace, self.dest, new_values)
@@ -34,8 +34,8 @@ def not_any_ipv4_ip_address(value):
     if ip_value.version != 4:
         msg = f"'{value}' is not a valid IPv4 address."
         raise argparse.ArgumentTypeError(msg)
-    if ip_value == any_ipv4_address:
-        msg = f"Can't specify all IPv4 addresses '{str(any_ipv4_address)}'."
+    if ip_value == ANY_IPV4_ADDRESS:
+        msg = f"Can't specify all IPv4 addresses '{str(ANY_IPV4_ADDRESS)}'."
         raise argparse.ArgumentTypeError(msg)
     return ip_value
 
