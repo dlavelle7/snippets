@@ -1,12 +1,17 @@
-"""Argparsing example using a custom Action (Python 3).
+"""Argparsing example using a custom Action (Python 3.6).
 
 Accept a list of ip addresses as strings, that needs to be converted to a
 list of sets containing ip_address() objects.
 Encounted using: aiohttp_remotes.XForwardedStrict.
+
+Call script like:
+    python python/argparsing_custom_action.py -t 192.168.1.1 192.168.2.2
 """
 import argparse
 
 from ipaddress import ip_address
+
+any_ipv4_address = ip_address("0.0.0.0")
 
 
 class StoreNargsAsListOfSets(argparse.Action):
@@ -17,17 +22,35 @@ class StoreNargsAsListOfSets(argparse.Action):
         setattr(namespace, self.dest, new_values)
 
 
+def not_any_ipv4_ip_address(value):
+    """Only valid IPv4 addresses allowed. Don't allow 'any IPv4 address at all'
+
+    Remember "type" validates nargs independently.
+    """
+    try:
+        ip_value = ip_address(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(str(exc))
+    if ip_value.version != 4:
+        msg = f"'{value}' is not a valid IPv4 address."
+        raise argparse.ArgumentTypeError(msg)
+    if ip_value == any_ipv4_address:
+        msg = f"Can't specify all IPv4 addresses '{str(any_ipv4_address)}'."
+        raise argparse.ArgumentTypeError(msg)
+    return ip_value
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-t',
         '--trusted-hosts',
-        help='A list of trusted hosts.',
+        help='A list of trusted hosts (IPv4).',
         dest="TRUSTED_HOSTS",
         default=[{ip_address("127.0.0.1")}],
         nargs="+",
         action=StoreNargsAsListOfSets,
-        type=ip_address
+        type=not_any_ipv4_ip_address
     )
     pargs = parser.parse_args()
-    print(pargs.TRUSTED_HOSTS)
+    print(f"Trusted IPv4 hosts: {pargs.TRUSTED_HOSTS}")
