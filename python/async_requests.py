@@ -38,14 +38,15 @@ async def async_get_paged_results(url, session, params=None):
         for result in results["results"]:
             yield result
 
+
 async def make_async_requests(urls):
     async with ClientSession() as session:
-	for url in urls:
-	    try:
-		results = await async_get(url, session)
-		print(f"Success: {results['count']} results")
-	    except ClientResponseError as exc:
-		print(f"Error: {exc.response_body}")
+        for url in urls:
+            try:
+                results = await async_get(url, session)
+                print(f"Success: {results['count']} results")
+            except ClientResponseError as exc:
+                print(f"Error: {exc.response_body}")
 
 
 if __name__ == "__main__":
@@ -59,5 +60,6 @@ if __name__ == "__main__":
 
     # TODO:
     # Example of async generator function
+    # url = "https://uo-db-api.herokuapp.com/uo/users",
     #all_results_list = [x async for x in self.get_paged_results(url, session)]
     #print(f"Length of all results {len(all_results_list}")

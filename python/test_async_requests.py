@@ -6,8 +6,8 @@ from asynctest import TestCase, patch, MagicMock, CoroutineMock, call, Mock
 
 class TestAsyncRequests(TestCase):
 
-    @patch('async_requests.ClientSession.__aenter__'):
-        async def test_async_requests(self, mock_session_context):
+    @patch('async_requests.ClientSession.__aenter__')
+    async def test_async_requests(self, mock_session_context):
         mock_get_json = CoroutineMock(side_effect=[{"id": 111}])
         mock_get_response = MagicMock()
         mock_get_response.__aenter__.return_value = MagicMock(
