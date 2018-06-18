@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Asynchronous (aiohttp) request client - Python 3.6."""
+"""Asynchronous (aiohttp) request client - Python 3.6.5"""
 from asyncio import get_event_loop
 from aiohttp import ClientSession
 from aiohttp.client_exceptions import ClientResponseError
@@ -11,7 +11,7 @@ async def async_request(request_method, url, **request_kwargs):
         try:
             response.raise_for_status()
         except ClientResponseError as exc:
-            # raise_for_status() doesn't get body the response body
+            # raise_for_status() doesn't get the response body
             exc.response_body = data
             raise
         return data
