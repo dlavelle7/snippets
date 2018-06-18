@@ -1,6 +1,6 @@
+"""Async unit test for `async_requests.py` module."""
+from asynctest import TestCase, patch, MagicMock, CoroutineMock, call
 from async_requests import make_async_requests
-
-from asynctest import TestCase, patch, MagicMock, CoroutineMock, call, Mock
 
 
 class TestAsyncRequests(TestCase):
@@ -23,7 +23,7 @@ class TestAsyncRequests(TestCase):
         mock_session = MagicMock(get=mock_get)
         mock_session_context.return_value = mock_session
 
-        actual = await make_async_requests(['foo', 'bar', 'spam'])
+        await make_async_requests(['foo', 'bar', 'spam'])
 
         # Assert mock get called with expected urls
         expected_calls = [

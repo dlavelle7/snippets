@@ -56,14 +56,14 @@ async def make_async_get_paged_requests(url):
 
 
 if __name__ == "__main__":
-    urls = [
+    test_urls = [
         "https://uo-db-api.herokuapp.com/uo/users",
         "https://uo-db-api.herokuapp.com/uo/users",
     ]
     loop = get_event_loop()
 
     # Example of async get requests
-    loop.run_until_complete(make_async_requests(urls))
+    loop.run_until_complete(make_async_requests(test_urls))
 
     # Example of async generator function
-    loop.run_until_complete(make_async_get_paged_requests(urls[0]))
+    loop.run_until_complete(make_async_get_paged_requests(test_urls[0]))
