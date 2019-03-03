@@ -9,7 +9,7 @@ def main():
     parser.add_argument("base", help="base value", type=int)
     # Optional argument
     parser.add_argument("-e", "--expodent",
-                        help="expodent value (defaults to 2)", 
+                        help="expodent value (defaults to 2)",
                         type=int, default=2, choices=[0, 1, 2, 3, 4])
     group.add_argument("-v", "--verbose", help="increased output verbosity",
                        action="store_true")

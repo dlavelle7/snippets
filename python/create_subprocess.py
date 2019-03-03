@@ -6,12 +6,14 @@ import traceback
 
 def create_process(cmd_string):
     try:
-        process = Popen(cmd_string, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        process = Popen(cmd_string, shell=True, stdin=PIPE, stdout=PIPE,
+                        stderr=PIPE)
         print "Executing command: '%s'" % cmd_string
         stdoutdata, stderrdata = process.communicate()
 
         if process.returncode:
-            print "Error: Command failed with returncode %s" % process.returncode
+            print "Error: Command failed with returncode {0}".format(
+                process.returncode)
             if stderrdata:
                 print stderrdata
         else:
