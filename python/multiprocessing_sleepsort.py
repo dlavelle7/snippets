@@ -43,4 +43,4 @@ def sort(unsorted):
         print(f"Sorted: {shared_list}")
 
 
-sort([0.5, 0.2, 0.1, 0.4])
+sorted_list = sort([3, 2, 5, 1, 4])
