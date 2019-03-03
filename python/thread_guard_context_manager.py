@@ -22,6 +22,7 @@ def foo(thread_id):
     time.sleep(3)
     print "Thread {0} finished".format(thread_id)
 
+
 t1 = threading.Thread(target=foo, args=[1])
 t2 = threading.Thread(target=foo, args=[2])
 

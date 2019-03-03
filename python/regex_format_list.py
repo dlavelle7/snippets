@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import re
 
 
@@ -12,6 +11,7 @@ def format_list(my_list):
     ['x']           => "x"
     """
     return re.sub(r'(.*),', r'\1 and', ', '.join(my_list))
+
 
 print format_list(['x', 'y', 'z'])
 print format_list(['x', 'y'])
